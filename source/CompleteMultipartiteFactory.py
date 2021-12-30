@@ -22,10 +22,6 @@ class CompleteMultipartiteFactory(HypergraphFactory):
                 res.append(s)
         return res
 
-    def subset_sums(self, target):
-        r = list(range(1, target))
-        return self._subset_sum_rec(self.k, r, target, [], [])
-
     def create_complete_multipartite_k_hg(self, partition):
         i = 0
         parts = []
@@ -52,7 +48,7 @@ class CompleteMultipartiteFactory(HypergraphFactory):
 
     def get_complete_multipartite_k_hgs(self):
         all_cm_hgs = []
-        part_numbers = self.subset_sums(len(self.v_set))
+        part_numbers = self.partition_sizes(len(self.v_set), 1, self.k)
         for partition in part_numbers:
             all_cm_hgs.append(self.create_complete_multipartite_k_hg(partition))
         return all_cm_hgs
@@ -61,8 +57,8 @@ class CompleteMultipartiteFactory(HypergraphFactory):
         return self.get_complete_multipartite_k_hgs()
 
 
-k = 2
-vertex_set = [1, 2, 3]
+k = 3
+vertex_set = [1, 2, 3, 4]
 
 a = CompleteMultipartiteFactory(k, vertex_set).get_hypergraphs()
 for b in a:

@@ -12,7 +12,7 @@ class L12Factory(HypergraphFactory):
             C = self.v_set[:C_size]
             graph_vertices = self.v_set[C_size:]
             G = []
-            component_sizes_lists = self.graph_component_sizes(len(graph_vertices))
+            component_sizes_lists = self.partition_sizes(len(graph_vertices), 2, 1)
             for component_sizes in component_sizes_lists:
                 n = 0
                 components = []
@@ -39,10 +39,6 @@ class L12Factory(HypergraphFactory):
             for f in l1:
                 result.append(e + f)
         return result
-
-    def graph_component_sizes(self, target):
-        r = list(range(2, target + 1))
-        return self._subset_sum_rec(1, r, target, [], [])
 
     def get_hypergraphs(self):
         return self.get_L12_hgs()
