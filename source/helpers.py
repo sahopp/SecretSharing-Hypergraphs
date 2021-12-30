@@ -1,6 +1,7 @@
 import itertools
 
 
+# returns the powerset of a given list
 def powerset(lst):
     pset = list()
     for n in range(len(lst) + 1):
@@ -9,15 +10,17 @@ def powerset(lst):
     return pset
 
 
-def subsets_of_cardinality(lst, c):
+# returns all subsets of a certain size of a given list
+def subsets_of_cardinality(lst, size):
     ps = powerset(lst)
     res = []
     for s in ps:
-        if len(s) == c:
+        if len(s) == size:
             res.append(s)
     return res
 
 
+# checks whether a hypergraph covers nr_verts vertices
 def covers_n_vertices(hg, nr_verts):
     verts = []
     for he in hg:
