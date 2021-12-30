@@ -6,15 +6,6 @@ class CompleteMultipartiteFactory(HypergraphFactory):
         self.k = k
         self.v_set = v_set
 
-    @staticmethod
-    def subsets_of_cardinality(L, c):
-        ps = powerset(L)
-        res = []
-        for s in ps:
-            if len(s) == c:
-                res.append(s)
-        return res
-
     def create_complete_multipartite_k_hg(self, partition):
         i = 0
         parts = []
@@ -22,7 +13,7 @@ class CompleteMultipartiteFactory(HypergraphFactory):
             parts.append(self.v_set[i:i + p])
             i += p
         he = []
-        combs = self.subsets_of_cardinality(parts, self.k)
+        combs = subsets_of_cardinality(parts, self.k)
         for comb in combs:
             he += self.all_k_combs(comb)
         return he
