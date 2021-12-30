@@ -1,16 +1,16 @@
 import itertools
 
 
-def powerset(l):
+def powerset(lst):
     pset = list()
-    for n in range(len(l) + 1):
-        for sset in itertools.combinations(l, n):
+    for n in range(len(lst) + 1):
+        for sset in itertools.combinations(lst, n):
             pset.append(list(sset))
     return pset
 
 
-def subsets_of_cardinality(L, c):
-    ps = powerset(L)
+def subsets_of_cardinality(lst, c):
+    ps = powerset(lst)
     res = []
     for s in ps:
         if len(s) == c:

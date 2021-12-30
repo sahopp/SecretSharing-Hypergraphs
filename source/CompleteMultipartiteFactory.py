@@ -39,11 +39,3 @@ class CompleteMultipartiteFactory(HypergraphFactory):
 
     def get_hypergraphs(self):
         return self.get_complete_multipartite_k_hgs()
-
-
-k = 3
-vertex_set = [1, 2, 3, 4]
-
-a = CompleteMultipartiteFactory(k, vertex_set).get_hypergraphs()
-for b in a:
-    print(b)
