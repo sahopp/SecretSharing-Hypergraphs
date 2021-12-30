@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod, abstractclassmethod
-import itertools
-
+from helpers import *
 
 class HypergraphFactory(ABC):
     def partition_sizes(self, nr_vertices, min_part_size, min_part_nr):
