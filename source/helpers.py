@@ -1,4 +1,5 @@
 import itertools
+from random import sample
 
 
 # returns the powerset of a given list
@@ -28,9 +29,21 @@ def covers_n_vertices(hg, nr_verts):
     return len(set(verts)) == nr_verts
 
 
-def hg_hash(hg):
-    hash_val = 0
-    for e in hg:
-        e.sort()
-        hash_val += (107885204*e[0] + 3835246*e[1] + 3149*e[2]) ** 2
-    return hash_val
+# Factory for hash functions which map k-uniform hypergraphs onto integers
+# Invariant wrt. order of hyperedges and order of vertices in hyperedges
+class HypergraphHashFunctionFactory:
+    def __init__(self, k):
+        self.k = k
+        self.rand_vals = sample(range(1, 1000), k)
+
+    def compute_hash(self, hg):
+        hash_val = 0
+        for e in hg:
+            assert len(e) == self.k
+            assert len(set(e)) == self.k
+            e.sort()
+            he_hash = 0
+            for i in range(self.k):
+                he_hash += (self.rand_vals[i] * e[i])
+            hash_val += he_hash ** 2
+        return hash_val

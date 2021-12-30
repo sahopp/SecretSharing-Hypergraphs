@@ -16,6 +16,8 @@ all_hashes = set()
 nr_perm = len(permutations)
 cnt = 0
 
+hash_fnc = HypergraphHashFunctionFactory(3)
+
 for p in permutations:
     cnt += 1
     print("Permuatation " + str(cnt) + "/" + str(nr_perm) + "\r")
@@ -53,14 +55,14 @@ for p in permutations:
 
     # Compute hashes
     for hg in forbidden_hgs:
-        forbidden_hashes.add(hg_hash(hg))
+        forbidden_hashes.add(hash_fnc.compute_hash(hg))
 
     ############## IDEAL ##############
     ideal_hgs = CompleteMultipartiteFactory(3, p).get_hypergraphs() + L12Factory(p).get_hypergraphs()
 
     # Compute hashes
     for hg in ideal_hgs:
-        ideal_hashes.add(hg_hash(hg))
+        ideal_hashes.add(hash_fnc.compute_hash(hg))
 
 total_hashes = ideal_hashes.union(forbidden_hashes)
 all_HGs = powerset(subsets_of_cardinality(vertices, 3))
@@ -68,7 +70,7 @@ all_HGs = powerset(subsets_of_cardinality(vertices, 3))
 for hg in all_HGs:
     h = 0
     if covers_n_vertices(hg, nr_vertices):
-        h = hg_hash(hg)
+        h = hash_fnc.compute_hash(hg)
         all_hashes.add(h)
         if h not in total_hashes:
             print("Not characterized: " + str(hg))
