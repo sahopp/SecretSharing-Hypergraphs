@@ -4,6 +4,9 @@ from CompleteMultipartiteFactory import *
 
 class L12Factory(HypergraphFactory):
     def __init__(self, v_set):
+        assert len(v_set) == len(set(v_set)), 'L12Factory: No duplicated vertices allowed in vertex set'
+        assert len(v_set) >= 3, 'L12Factory: Size of vertex set must be at least 3'
+
         self.v_set = v_set
 
     def get_L12_hgs(self):

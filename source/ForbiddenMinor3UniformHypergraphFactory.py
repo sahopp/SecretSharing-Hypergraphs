@@ -4,7 +4,9 @@ from helpers import *
 
 class ForbiddenMinor3UniformHypergraphFactory(HypergraphFactory):
     def __init__(self, v_set):
-        assert len(set(v_set)) == 5
+        assert len(v_set) == len(set(v_set)), 'ForbiddenMinor3UniformHypergraphFactory: No duplicated vertices allowed in vertex set'
+        assert len(v_set) == 5, 'ForbiddenMinor3UniformHypergraphFactory: Size of vertex set must be exactly 5'
+
         self.v_set = v_set
         self.forbidden_minors = []
 

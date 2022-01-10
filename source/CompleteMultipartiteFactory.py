@@ -3,6 +3,10 @@ from HypergraphFactory import *
 
 class CompleteMultipartiteFactory(HypergraphFactory):
     def __init__(self, k, v_set):
+        assert k > 1, 'CompleteMultipartiteFactory: k>1 required'
+        assert len(v_set) == len(set(v_set)), 'CompleteMultipartiteFactory: No duplicated vertices allowed in vertex set'
+        assert len(v_set) >= k, 'CompleteMultipartiteFactory: Size of vertex set must be at least k'
+
         self.k = k
         self.v_set = v_set
 
